@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Live job snapshots</title>
+<style>
+    body {
+        font: 16px system-ui;
+        max-width: 760px;
+        margin: 48px auto;
+        padding: 0 20px
+    }
+
+    label {
+        display: inline-block;
+        margin: 8px
+    }
+
+    button,
+    select,
+    input {
+        font: inherit;
+        padding: 6px
+    }
+
+    pre {
+        white-space: pre-wrap;
+        background: #eee;
+        color: #222;
+        padding: 20px
+    }
+
+    fieldset {
+        margin: 16px 0
+    }
+</style>
+<h1>Live job snapshots</h1>
+<p>Three scripted snapshots. Each snapshot replaces the selection; Start runs the demo again.</p>
+<form>
+    <label>Project 
+        <select id="project">
+            <option>warehouse</option>
+            <option>billing</option>
+        </select>
+    </label>
+    <fieldset>
+        <legend>Status filter</legend>
+        <label>
+            <input type="checkbox" value="running" checked>Running
+        </label>
+        <label>
+            <input type="checkbox" value="failed" checked>Failed</label>
+        <label>
+            <input type="checkbox" value="completed">Completed</label>
+            <label><input type="checkbox" value="queued">Queued</label>
+    </fieldset>
+    <button>Start stream</button>
+    <button type="button" id="stop">Stop</button>
+</form>
+<p id="status" role="status">Ready</p>
+<pre aria-live="polite">No snapshot yet.</pre>
+<script type="importmap">{"imports":{"eventsource-parser/stream":"/vendor/stream.js"}}</script>
+<script type="module" src="/client.mjs"></script>
+
+</html>

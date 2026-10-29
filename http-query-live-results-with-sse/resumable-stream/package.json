@@ -1,0 +1,8 @@
+{
+  "name": "query-sse-demo",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <26" },
+  "scripts": { "start": "node server.mjs", "test": "node --test demo.check.mjs" },
+  "dependencies": { "express": "^5.1.0" }
+}

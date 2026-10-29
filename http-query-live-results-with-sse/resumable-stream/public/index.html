@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QUERY + SSE, step by step</title>
+<style>
+  body { max-width: 850px; margin: 3rem auto; padding: 0 1.2rem; font: 17px/1.6 system-ui; color: #172c3c; background: #f4f7fa; }
+  h1 { line-height: 1.15; } section { background: white; padding: 1.4rem; border-radius: 12px; margin: 1.2rem 0; }
+  button, input { font: inherit; } button { padding: .4rem .8rem; margin: .3rem; cursor: pointer; }
+  pre { background: #122637; color: #d2efeb; padding: 1rem; overflow: auto; max-height: 310px; font-size: 14px; }
+  input[type=number] { width: 4rem; } label { display: inline-block; margin-right: 1rem; }
+</style>
+<h1>One query. Two response formats.</h1>
+<p><code>QUERY</code> carries read-only query input in a request body. It is safe and idempotent. JSON returns the full result; <strong>SSE</strong> delivers events over time.</p>
+<label>Minimum value <input id="min" type="number" min="0" max="99" value="0"></label>
+<section>
+  <h2>1. A single JSON response</h2>
+  <button id="once">Run QUERY</button>
+  <pre id="json" aria-live="polite">Your result will appear here.</pre>
+</section>
+<section>
+  <h2>2. An SSE response, read with Fetch</h2>
+  <label><input id="drop" type="checkbox" checked> Drop the connection after every 3 events</label>
+  <p>The client reconnects with <code>Last-Event-ID</code>. Each connection continues through the same 30 fixed readings. Options are captured when you press Start.</p>
+  <button id="start">Start stream</button><button id="stop" disabled>Stop</button>
+  <pre id="events" role="log" aria-live="polite">Stream events will appear here.</pre>
+</section>
+<p><code>fetch()</code> resolves on headers. <code>response.json()</code> waits for the whole body; a body reader waits for chunks. A chunk can contain half an event, several events, or half a UTF-8 character.</p>
+<p>This client implements reconnection and replay explicitly. That is separate from an HTTP client's transparent retry of an idempotent request. Native <code>EventSource</code> cannot send this QUERY body.</p>
+<script type="module" src="/client.mjs"></script>
+</html>
