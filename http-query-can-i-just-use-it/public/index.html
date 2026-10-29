@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>QUERY search</title>
+<style>
+    body {
+        font: 16px system-ui;
+        max-width: 760px;
+        margin: 48px auto;
+        padding: 0 20px
+    }
+
+    label {
+        display: inline-block;
+        margin: 8px
+    }
+
+    button,
+    select,
+    input {
+        font: inherit;
+        padding: 6px
+    }
+
+    pre {
+        white-space: pre-wrap;
+        background: #eee;
+        color: #222;
+        padding: 20px
+    }
+
+    fieldset {
+        margin: 16px 0
+    }
+</style>
+<h1>QUERY search</h1>
+<form><label>Category <select id="category">
+            <option>books</option>
+            <option>games</option>
+        </select></label><label>Maximum price <input id="price" type="number" min="0"
+            value="25"></label><button>Search</button></form>
+<pre aria-live="polite">Choose a filter and search.</pre>
+<script type="module" src="/client.mjs"></script>
+
+</html>
